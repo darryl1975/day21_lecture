@@ -21,4 +21,8 @@ public class CustomerService {
     public List<Customer> retrieveAllCustomersWithLimitOffset(int limit, int offset) {
         return custRepo.getAllCustomersWithLimitOffset(limit, offset);
     }
+
+    public Customer getCustomerById(int id) {
+        return custRepo.getCustomerById(id);
+    }
 }
