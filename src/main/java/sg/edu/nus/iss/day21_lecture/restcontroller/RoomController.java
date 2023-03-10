@@ -44,8 +44,8 @@ public class RoomController {
 
         if (rooms.isEmpty()) {
             //return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-            // return ResponseEntity.noContent().build();
-            throw new ResourceNotFoundException("No room found");
+            return ResponseEntity.noContent().build();
+            // throw new ResourceNotFoundException("No room found");
         } else {
             //return new ResponseEntity<>(rooms, HttpStatus.OK);
             return ResponseEntity.ok().body(rooms);

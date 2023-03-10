@@ -6,12 +6,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCallback;
 import org.springframework.jdbc.core.PreparedStatementSetter;
 import org.springframework.stereotype.Repository;
 
+import sg.edu.nus.iss.day21_lecture.exception.ResourceNotFoundException;
 import sg.edu.nus.iss.day21_lecture.model.Room;
 
 @Repository
@@ -69,9 +71,22 @@ public class RoomRepository implements IRoomRepository {
     }
 
     @Override
-    public Room findById(Integer id) {
+    public Room findById(Integer id) throws DataAccessException {
 
-        return jdbcTemplate.queryForObject(findByIdSQL, BeanPropertyRowMapper.newInstance(Room.class), id);
+        try {
+            Room room = jdbcTemplate.queryForObject(findByIdSQL, BeanPropertyRowMapper.newInstance(Room.class), id);
+
+            return room;
+        } catch (DataAccessException daex) {
+            throw new ResourceNotFoundException("Room " + id + " not found!!!");
+        }
+        // Room room = jdbcTemplate.queryForObject(findByIdSQL, BeanPropertyRowMapper.newInstance(Room.class), id);
+
+        // if (room == null) {
+        //     throw new ResourceNotFoundException("Room " + id + " not found!!!");
+        // } else {
+        //     return room;
+        // }
     }
 
     @Override
