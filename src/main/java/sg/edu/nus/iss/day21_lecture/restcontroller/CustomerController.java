@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import sg.edu.nus.iss.day21_lecture.model.Customer;
+import sg.edu.nus.iss.day21_lecture.model.Order;
 import sg.edu.nus.iss.day21_lecture.service.CustomerService;
 
 @RestController
@@ -32,5 +33,10 @@ public class CustomerController {
     @GetMapping("/{id}")
     public Customer getCustomerById(@PathVariable("id") int id) {
         return custSvc.getCustomerById(id);
+    }
+
+    @GetMapping("/{customer_id}/orders")
+    public List<Order> getOrderByCustomerId(@PathVariable("customer_id") int id) {
+        return custSvc.getOrderByCustomerId(id);
     }
 }
