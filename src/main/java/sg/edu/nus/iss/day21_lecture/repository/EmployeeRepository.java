@@ -118,6 +118,7 @@ public class EmployeeRepository {
                     employee.setFirstName(rs.getString("first_name"));
                     employee.setLastName(rs.getString("last_name"));
                     employee.setSalary(rs.getInt("salary"));
+                    employee.setDependants(new ArrayList<Dependant>());
 
                     // d.id dep_id, d.full_name, d.birth_date, d.relationship
                     Dependant dependant = new Dependant();
@@ -171,6 +172,7 @@ public class EmployeeRepository {
                     employee.setFirstName(rs.getString("first_name"));
                     employee.setLastName(rs.getString("last_name"));
                     employee.setSalary(rs.getInt("salary"));
+                    employee.setDependants(new ArrayList<Dependant>());
 
                     // d.id dep_id, d.full_name, d.birth_date, d.relationship
                     Dependant dependant = new Dependant();
@@ -179,7 +181,7 @@ public class EmployeeRepository {
                     dependant.setRelationship(rs.getString("relationship"));
                     dependant.setBirthDate(rs.getDate("birth_date"));
 
-                    if (rs.first()) {
+                    if (rs.isFirst()) {
                         emp = employee;
                         emp.getDependants().add(dependant);
                     } else {
