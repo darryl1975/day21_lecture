@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
+import sg.edu.nus.iss.day21_lecture.exception.ResourceNotFoundException;
 import sg.edu.nus.iss.day21_lecture.model.Room;
 import sg.edu.nus.iss.day21_lecture.service.RoomService;
 
@@ -43,8 +44,8 @@ public class RoomController {
 
         if (rooms.isEmpty()) {
             //return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-            return ResponseEntity.noContent().build();
-            // throw new ResourceNotFoundException("No room found");
+            // return ResponseEntity.noContent().build();
+            throw new ResourceNotFoundException("No room found");
         } else {
             //return new ResponseEntity<>(rooms, HttpStatus.OK);
             return ResponseEntity.ok().body(rooms);
